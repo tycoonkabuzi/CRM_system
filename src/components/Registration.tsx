@@ -3,11 +3,12 @@ import styled from "styled-components";
 import apiClient from "../apiCRM";
 import { useNavigate } from "react-router";
 const Main = styled.div`
-  background-color: #ececec;
+  background-color: #f4f4f4;
   width: 40%;
   margin: auto;
-  padding: 20px;
-  margin-top: 200px;
+  padding: 50px 30px 50px 30px;
+  margin-top: 15%;
+  box-shadow: 1px 1px 20px #c3c3c3;
 `;
 const Form = styled.form`
   display: flex;
@@ -17,29 +18,31 @@ const Form = styled.form`
   width: 80%;
   margin: auto;
 `;
+
 const Input = styled.input`
-  width: 300px;
+  width: 70%;
   height: 20px;
+  border: 1px solid #e8e8e8;
+  padding: 5px;
 `;
 const Title = styled.h1`
   font-size: 30px;
 `;
 const Label = styled.label`
-  width: 100%;
+  width: 20%;
   text-align: left;
 `;
-const ContainerLabels = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
-const ContainerInputs = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-`;
+
 const Button = styled.button`
   margin: auto;
+  border: 2px solid #e8e8e8;
+  background-color: #ffffff;
+  font-size: 14px;
+  padding: 10px 40px 10px 40px;
+  &:hover {
+    background-color: #ececec;
+    border: 2px solid #ffffff;
+  }
 `;
 const Registration = () => {
   const [data, setData] = useState({});
@@ -64,31 +67,28 @@ const Registration = () => {
     <Main>
       <Title>Sign up</Title>
       <Form>
-        <ContainerLabels>
-          <Label>Username:</Label>
-          <Label>Email:</Label>
-          <Label>Password:</Label>
-        </ContainerLabels>
-        <ContainerInputs>
-          <Input
-            onChange={getDataInputs}
-            name="name"
-            type="text"
-            placeholder="eg:kabuziNtwali"
-          />
-          <Input
-            onChange={getDataInputs}
-            name="email"
-            type="email"
-            placeholder="eg:kabuziNtwali@gmail.com"
-          />
-          <Input
-            onChange={getDataInputs}
-            name="password"
-            type="password"
-            placeholder="password"
-          />
-        </ContainerInputs>
+        <Label>Username:</Label>
+        <Input
+          onChange={getDataInputs}
+          name="name"
+          type="text"
+          placeholder="eg:kabuziNtwali"
+        />
+        <Label>Email:</Label>
+        <Input
+          onChange={getDataInputs}
+          name="email"
+          type="email"
+          placeholder="eg:kabuziNtwali@gmail.com"
+        />
+        <Label>Password:</Label>
+
+        <Input
+          onChange={getDataInputs}
+          name="password"
+          type="password"
+          placeholder="password"
+        />
         <Button
           onClick={(e) => {
             e.preventDefault();
