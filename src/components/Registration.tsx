@@ -53,7 +53,7 @@ const Registration = () => {
     setData((prev) => ({ ...prev, [name]: e.target.value }));
   };
 
-  async function registerClient() {
+  const registerClient = async () => {
     try {
       const response = await apiClient.post("auth/signup", data);
       alert("You are now registered");
@@ -61,7 +61,7 @@ const Registration = () => {
     } catch (error) {
       console.error("Error fetching clients:", error);
     }
-  }
+  };
 
   return (
     <Main>

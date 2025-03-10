@@ -55,17 +55,17 @@ const Login = () => {
     const name = e.target.name;
     setData((prev) => ({ ...prev, [name]: e.target.value }));
   };
-  async function sendDataToApi() {
+  const sendDataToApi = async () => {
     try {
       const response = await apiClient.post("/auth/login", data);
+      navigate("/dashboard");
       dispatch(
         login({ token: response.data.jwt, username: response.data.name })
       );
-      navigate("/dashboard");
     } catch (error) {
       console.error("Error fetching clients:", error);
     }
-  }
+  };
 
   return (
     <Main>
