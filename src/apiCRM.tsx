@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Creating an Axios instance
-const apiClient = axios.create({
+export const apiClient = axios.create({
   baseURL: "https://crm-app-akademia108-bf1127afa289.herokuapp.com", // Base API URL
   timeout: 10000, // Maximum response waiting time
 });
@@ -33,5 +33,7 @@ apiClient.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-
-export default apiClient;
+export const standardApiClient = axios.create({
+  baseURL: "https://crm-app-akademia108-bf1127afa289.herokuapp.com", // Base API URL
+  timeout: 10000, // Maximum response waiting time
+});

@@ -1,51 +1,10 @@
-import styled from "styled-components";
-import apiClient from "../apiCRM";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../store/authenticationSlice";
 import { useNavigate } from "react-router";
-const Main = styled.div`
-  background-color: #f4f4f4;
-  width: 30%;
-  margin: auto;
-  padding: 50px 30px 50px 30px;
-  margin-top: 15%;
-  box-shadow: 1px 1px 20px #c3c3c3;
-`;
-const Form = styled.form`
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: auto;
-`;
-
-const Input = styled.input`
-  width: 70%;
-  height: 20px;
-  border: 1px solid #e8e8e8;
-  padding: 5px;
-`;
-const Title = styled.h1`
-  font-size: 30px;
-`;
-const Label = styled.label`
-  width: 20%;
-  text-align: left;
-`;
-
-const Button = styled.button`
-  margin: auto;
-  border: 2px solid #e8e8e8;
-  background-color: #ffffff;
-  font-size: 14px;
-  padding: 10px 40px 10px 40px;
-  &:hover {
-    background-color: #ececec;
-    border: 2px solid #ffffff;
-  }
-`;
+import { apiClient } from "../apiCRM";
+import { Button } from "../reusableStyle/buttons";
+import { Input, Label, Main, Form, Title } from "../reusableStyle/loginSignOut";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -87,7 +46,7 @@ const Login = () => {
         />
 
         <Button
-          onClick={(e) => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
             e.preventDefault();
             sendDataToApi();
           }}
