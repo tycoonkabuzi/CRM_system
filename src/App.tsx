@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import Dashboard from "./views/Dashboard";
 import Customer from "./components/Customer";
 import ListCustomers from "./components/ListCustomers";
+import NewCustomer from "./views/NewCustomer";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<ListCustomers />} />
           <Route path="customer/:id" element={<Customer />} />
+          <Route path="newcostomer" element={<NewCustomer />} />
         </Route>
       </Routes>
     </>

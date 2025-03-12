@@ -3,8 +3,6 @@ import styled from "styled-components";
 import { logout } from "../store/authenticationSlice";
 import { Link, Outlet, useNavigate } from "react-router";
 
-import Pagination from "../components/Pagination";
-
 const Main = styled.div``;
 const NavigationBar = styled.nav`
   background-color: #e6e6e6;
@@ -72,13 +70,12 @@ const Dashboard = () => {
             </ListElement>
 
             <ListElement>
-              <Link to={""}>Add customers</Link>
+              <Link to={"/dashboard/newcostomer"}>Add customers</Link>
             </ListElement>
           </UnOrderedList>
         </SideBar>
         <Outlet />
       </ContainerContent>
-      <Pagination />
     </Main>
   );
 };

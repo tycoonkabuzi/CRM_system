@@ -32,12 +32,13 @@ const Pagination = () => {
     createPagination(page);
   }, [page]);
   const navigate = useNavigate();
+  console.log(page);
   return (
     <Main>
       {pageArray.length > 1 ? (
         pageArray.map((aPage) => (
           <SmallButton
-            onClick={() => navigate(`/customers?page=${aPage} &limit=10`)}
+            onClick={() => navigate(`/dashboard?page=${aPage}&limit=10`)}
           >
             {aPage}
           </SmallButton>
