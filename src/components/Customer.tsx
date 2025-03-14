@@ -3,12 +3,14 @@ import { Title } from "../reusableStyle/loginSignOut";
 import { apiClient } from "../apiCRM";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { NewCustomerType } from "../types/customerType";
 const Main = styled.div`
   margin: auto;
   width: 50%;
   text-align: left;
 
   margin-top: 100px;
+  padding-bottom: 100px;
 `;
 const SubTitle = styled.h2`
   margin: 12px 0px 12px 0px;
@@ -22,7 +24,7 @@ const Element = styled.li`
 `;
 
 const Customer = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<NewCustomerType>();
   const { id } = useParams();
   const getCustomer = async () => {
     try {

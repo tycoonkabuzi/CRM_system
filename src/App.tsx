@@ -16,7 +16,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<ListCustomers />} />
           <Route path="customer/:id" element={<Customer />} />
-          <Route path="newcostomer" element={<NewCustomer />} />
+          <Route path="new" element={<NewCustomer />} />
+          <Route path="edit/" element={<NewCustomer />} />
         </Route>
       </Routes>
     </>

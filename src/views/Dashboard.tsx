@@ -2,7 +2,8 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { logout } from "../store/authenticationSlice";
 import { Link, Outlet, useNavigate } from "react-router";
-
+import Footer from "../components/Footer";
+import { change, cleanTheData } from "../store/newEditSlice";
 const Main = styled.div``;
 const NavigationBar = styled.nav`
   background-color: #e6e6e6;
@@ -41,7 +42,6 @@ const ListElement = styled.li`
   list-style: none;
 `;
 const Dashboard = () => {
-  //const user = useSelector((state) => state.auth.username);
   const user = localStorage.getItem("username"); // getting the data (username) from the localStorage
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -70,12 +70,21 @@ const Dashboard = () => {
             </ListElement>
 
             <ListElement>
-              <Link to={"/dashboard/newcostomer"}>Add customers</Link>
+              <Link
+                onClick={() => {
+                  dispatch(change(false));
+                  dispatch(cleanTheData());
+                }}
+                to={"/dashboard/new"}
+              >
+                Add customers
+              </Link>
             </ListElement>
           </UnOrderedList>
         </SideBar>
         <Outlet />
       </ContainerContent>
+      <Footer />
     </Main>
   );
 };
