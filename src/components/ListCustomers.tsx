@@ -6,6 +6,7 @@ import { Link, useNavigate, useSearchParams } from "react-router";
 import Pagination from "./Pagination";
 import { useDispatch } from "react-redux";
 import { change, setTheData } from "../store/newEditSlice";
+import { CustomerData } from "../types/customerType";
 
 const Main = styled.div`
   margin-top: 100px;
@@ -28,21 +29,6 @@ const SingleCustomer = styled.li`
   text-align: left;
 `;
 const ListCustomers = () => {
-  type CustomerData = {
-    actions: string[];
-
-    address: {
-      street: string;
-      suite: string;
-      city: string;
-      postcode: string;
-    };
-    name: string;
-    id?: string;
-    nip: string;
-    __v: number;
-    _id: string;
-  };
   const [data, setData] = useState<CustomerData[]>([]);
   const [loading, setLoading] = useState(true);
   const [triggerDelete, setTriggerDelete] = useState(true);

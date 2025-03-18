@@ -10,3 +10,8 @@ export type NewCustomerType = {
   nip: string;
   actions: string[];
 };
+
+export type CustomerData = NewCustomerType & {
+  __v: number;
+  _id: string;
+};

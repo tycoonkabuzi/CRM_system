@@ -34,11 +34,11 @@ const Customer = () => {
       console.error("Unable to Fetch the user", error);
     }
   };
+
   useEffect(() => {
     getCustomer();
   }, []);
 
-  console.log(data);
   return (
     <Main>
       <Title>Customer</Title>
