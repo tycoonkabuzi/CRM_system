@@ -66,7 +66,7 @@ const Dashboard = () => {
         <SideBar>
           <UnOrderedList>
             <ListElement>
-              <Link to={"/dashboard"}>List of customers</Link>
+              <Link to={"/"}>List of customers</Link>
             </ListElement>
 
             <ListElement>
@@ -75,7 +75,7 @@ const Dashboard = () => {
                   dispatch(change(false));
                   dispatch(cleanTheData());
                 }}
-                to={"/dashboard/new"}
+                to={"/new"}
               >
                 Add customers
               </Link>

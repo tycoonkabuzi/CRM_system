@@ -7,27 +7,13 @@ import Pagination from "./Pagination";
 import { useDispatch } from "react-redux";
 import { change, setTheData } from "../store/newEditSlice";
 import { CustomerData } from "../types/customerType";
+import { Main, Title } from "../reusableStyle/listStyle";
+import {
+  ContainerSingleItem,
+  OrderedList,
+  SingleItem,
+} from "../reusableStyle/listStyle";
 
-const Main = styled.div`
-  margin-top: 100px;
-  width: 80%;
-  padding-bottom: 50px;
-`;
-const Title = styled.h1``;
-const OrderedList = styled.ol`
-  padding: 20px;
-  width: 40%;
-  margin: auto;
-  margin-top: 20px;
-`;
-const ContainerSingleCustomer = styled.div`
-  display: flex;
-  margin-bottom: 12px;
-`;
-const SingleCustomer = styled.li`
-  width: 30%;
-  text-align: left;
-`;
 const ListCustomers = () => {
   const [data, setData] = useState<CustomerData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -67,12 +53,10 @@ const ListCustomers = () => {
         {loading == false ? (
           data.length != 0 ? (
             data.map((data: CustomerData) => (
-              <ContainerSingleCustomer key={data._id}>
-                <SingleCustomer>
-                  <Link to={`/dashboard/customer/${data._id}`}>
-                    {data.name}
-                  </Link>
-                </SingleCustomer>
+              <ContainerSingleItem key={data._id}>
+                <SingleItem>
+                  <Link to={`/customer/${data._id}`}>{data.name}</Link>
+                </SingleItem>
                 <SmallButton
                   onClick={() => {
                     dispatch(change(true));
@@ -93,7 +77,7 @@ const ListCustomers = () => {
                         ],
                       })
                     );
-                    navigate(`/dashboard/edit`);
+                    navigate(`/edit`);
                   }}
                 >
                   Edit
@@ -101,7 +85,7 @@ const ListCustomers = () => {
                 <SmallButton onClick={() => deleteCustomer(data._id)}>
                   Delete
                 </SmallButton>
-              </ContainerSingleCustomer>
+              </ContainerSingleItem>
             ))
           ) : (
             <p>Empty</p>

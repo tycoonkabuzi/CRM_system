@@ -2,8 +2,10 @@ import styled from "styled-components";
 import { Title } from "../reusableStyle/loginSignOut";
 import { apiClient } from "../apiCRM";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { NewCustomerType } from "../types/customerType";
+import { Button } from "../reusableStyle/buttons";
+import ListActions from "./ListActions";
 const Main = styled.div`
   margin: auto;
   width: 50%;
@@ -26,6 +28,8 @@ const Element = styled.li`
 const Customer = () => {
   const [data, setData] = useState<NewCustomerType>();
   const { id } = useParams();
+
+  const navigate = useNavigate();
   const getCustomer = async () => {
     try {
       const response = await apiClient.get(`/customers/${id}`);
@@ -54,6 +58,16 @@ const Customer = () => {
             <Element> postcode: {data.address.postcode}</Element>
           </UnOrderedList>
           <p>Nip: {data.nip}</p>
+          <br />
+          <Button
+            onClick={() => {
+              navigate(`/customer/${data._id}/add`);
+            }}
+          >
+            Add Action
+          </Button>
+
+          <ListActions />
         </>
       ) : (
         <p>Loading </p>

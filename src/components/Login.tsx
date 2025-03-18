@@ -17,7 +17,7 @@ const Login = () => {
   const sendDataToApi = async () => {
     try {
       const response = await apiClient.post("/auth/login", data);
-      navigate("/dashboard");
+      navigate("/");
       dispatch(
         login({ token: response.data.jwt, username: response.data.name })
       );

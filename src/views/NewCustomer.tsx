@@ -131,7 +131,7 @@ const NewCustomer = () => {
               editCustomer();
             }}
           >
-            Edit
+            Save
           </Button>
         )}
       </Form>
