@@ -34,7 +34,7 @@ const Tr = styled.tr`
   }
 `;
 const ListActions = () => {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState({ data: [] });
   const { id } = useParams();
   const addAction = async () => {
     try {
@@ -47,37 +47,39 @@ const ListActions = () => {
   useEffect(() => {
     addAction();
   }, []);
-
+  console.log(data);
   return (
     <Main>
-      <Title> Actions performed</Title>
-      {data.length != 0 ? (
-        <Table>
-          <Tr>
-            <Th>Description</Th>
-            <Th>Contact</Th>
-            <Th>Date</Th>
-            <Th>Edit</Th>
-            <Th>Delete</Th>
-          </Tr>
-          {data.data.map((singleAction) => (
+      {data.data.length !== 0 ? (
+        <>
+          <Title> Actions performed</Title>
+
+          <Table>
             <Tr>
-              <Td>{singleAction.description}</Td>
-              <Td>{singleAction.type}</Td>
-              <Td>{singleAction.date}</Td>
-              <Td>
-                <SmallButton>Edit</SmallButton>
-              </Td>
-              <Td>
-                <SmallButton>Delete</SmallButton>
-              </Td>
+              <Th>Description</Th>
+              <Th>Contact</Th>
+              <Th>Date</Th>
+              <Th>Edit</Th>
+              <Th>Delete</Th>
             </Tr>
-          ))}
-        </Table>
+            {data.data.map((singleAction) => (
+              <Tr>
+                <Td>{singleAction.description}</Td>
+                <Td>{singleAction.type}</Td>
+                <Td>{singleAction.date}</Td>
+                <Td>
+                  <SmallButton>Edit</SmallButton>
+                </Td>
+                <Td>
+                  <SmallButton>Delete</SmallButton>
+                </Td>
+              </Tr>
+            ))}
+          </Table>
+        </>
       ) : (
-        <p>Loading</p>
+        <p> Your actions will be displayed here</p>
       )}
-      <Pagination />
     </Main>
   );
 };
