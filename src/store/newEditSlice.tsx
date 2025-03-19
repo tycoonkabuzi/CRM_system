@@ -28,6 +28,7 @@ const changeSlice = createSlice({
         nip: "",
         actions: ["64b3f1b5e8b0a1234567890c", "64b3f1b5e8b0a1234567890d"],
       };
+      console.log(state);
     },
   },
 });

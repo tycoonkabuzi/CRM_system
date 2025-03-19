@@ -37,9 +37,7 @@ const Pagination = () => {
     <Main>
       {pageArray.length > 1 ? (
         pageArray.map((aPage) => (
-          <SmallButton
-            onClick={() => navigate(`/dashboard?page=${aPage}&limit=10`)}
-          >
+          <SmallButton onClick={() => navigate(`/?page=${aPage}&limit=10`)}>
             {aPage}
           </SmallButton>
         ))

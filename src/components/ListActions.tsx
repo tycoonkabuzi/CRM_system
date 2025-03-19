@@ -1,24 +1,83 @@
 import { useParams } from "react-router";
-import { apiClient, standardApiClient } from "../apiCRM";
-import { OrderedList } from "../reusableStyle/listStyle";
-import { Main } from "../reusableStyle/listStyle";
+import { apiClient } from "../apiCRM";
 import { Title } from "../reusableStyle/loginSignOut";
+import { useEffect, useState } from "react";
+import { SmallButton } from "../reusableStyle/buttons";
+import Pagination from "./Pagination";
+import styled from "styled-components";
 
+const Main = styled.div`
+  margin-top: 100px;
+  width: 90%;
+`;
+const Table = styled.table`
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+`;
+
+const Td = styled.td`
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+`;
+const Th = styled.td`
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+`;
+
+const Tr = styled.tr`
+  background-color: #dddddd;
+  &:nth-child(even) {
+    background-color: #ffffff;
+  }
+`;
 const ListActions = () => {
+  const [data, setData] = useState([]);
   const { id } = useParams();
   const addAction = async () => {
     try {
       const response = await apiClient.get(`/actions/${id}`);
-      console.log(response.data);
+      setData(response.data);
     } catch (error) {
       console.error("unable to add action  to api", error);
     }
   };
-  addAction();
+  useEffect(() => {
+    addAction();
+  }, []);
+
   return (
     <Main>
       <Title> Actions performed</Title>
-      <OrderedList></OrderedList>
+      {data.length != 0 ? (
+        <Table>
+          <Tr>
+            <Th>Description</Th>
+            <Th>Contact</Th>
+            <Th>Date</Th>
+            <Th>Edit</Th>
+            <Th>Delete</Th>
+          </Tr>
+          {data.data.map((singleAction) => (
+            <Tr>
+              <Td>{singleAction.description}</Td>
+              <Td>{singleAction.type}</Td>
+              <Td>{singleAction.date}</Td>
+              <Td>
+                <SmallButton>Edit</SmallButton>
+              </Td>
+              <Td>
+                <SmallButton>Delete</SmallButton>
+              </Td>
+            </Tr>
+          ))}
+        </Table>
+      ) : (
+        <p>Loading</p>
+      )}
+      <Pagination />
     </Main>
   );
 };

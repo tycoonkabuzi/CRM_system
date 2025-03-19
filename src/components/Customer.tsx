@@ -8,11 +8,11 @@ import { Button } from "../reusableStyle/buttons";
 import ListActions from "./ListActions";
 const Main = styled.div`
   margin: auto;
-  width: 50%;
+  width: 70%;
   text-align: left;
-
   margin-top: 100px;
   padding-bottom: 100px;
+  margin-left: 7%;
 `;
 const SubTitle = styled.h2`
   margin: 12px 0px 12px 0px;

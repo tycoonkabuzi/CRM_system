@@ -72,8 +72,8 @@ const Dashboard = () => {
             <ListElement>
               <Link
                 onClick={() => {
-                  dispatch(change(false));
                   dispatch(cleanTheData());
+                  dispatch(change(false));
                 }}
                 to={"/new"}
               >
