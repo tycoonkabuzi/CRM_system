@@ -1,10 +1,13 @@
-import { useParams } from "react-router";
+import { useNavigate, useParams, useSearchParams } from "react-router";
 import { apiClient } from "../apiCRM";
 import { Title } from "../reusableStyle/loginSignOut";
 import { useEffect, useState } from "react";
 import { SmallButton } from "../reusableStyle/buttons";
-import Pagination from "./Pagination";
+
 import styled from "styled-components";
+import Pagination from "./Pagination";
+import { useDispatch, useSelector } from "react-redux";
+import { changePage, getSingleAction } from "../store/newEditActionsSlice";
 
 const Main = styled.div`
   margin-top: 100px;
@@ -35,19 +38,40 @@ const Tr = styled.tr`
 `;
 const ListActions = () => {
   const [data, setData] = useState({ data: [] });
+
+  const [triggerDelete, setTriggerDelete] = useState(true);
+
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const addAction = async () => {
+  const navigate = useNavigate();
+  const [searchParam] = useSearchParams();
+  const thePage = searchParam.get("page");
+
+  const getActionsList = async () => {
     try {
-      const response = await apiClient.get(`/actions/${id}`);
+      const response = await apiClient.get(
+        `/actions/${id}?page=${thePage}&limit=10`
+      );
       setData(response.data);
     } catch (error) {
       console.error("unable to add action  to api", error);
     }
   };
+
+  const deleteAction = async (customerId: string) => {
+    try {
+      await apiClient.delete(`/actions/${customerId}`);
+      alert("Deleted Customer ");
+      setTriggerDelete(!triggerDelete);
+    } catch (error) {
+      console.error("unable to deleteCustomer", error);
+    }
+  };
+
   useEffect(() => {
-    addAction();
-  }, []);
-  console.log(data);
+    getActionsList();
+  }, [thePage, triggerDelete]);
+
   return (
     <Main>
       {data.data.length !== 0 ? (
@@ -63,15 +87,32 @@ const ListActions = () => {
               <Th>Delete</Th>
             </Tr>
             {data.data.map((singleAction) => (
-              <Tr>
+              <Tr key={singleAction.date}>
                 <Td>{singleAction.description}</Td>
                 <Td>{singleAction.type}</Td>
                 <Td>{singleAction.date}</Td>
                 <Td>
-                  <SmallButton>Edit</SmallButton>
+                  <SmallButton
+                    onClick={() => {
+                      navigate(`/customer/${id}/edit`);
+                      dispatch(changePage(true));
+                      dispatch(
+                        getSingleAction({
+                          type: singleAction.type,
+                          description: singleAction.description,
+                          date: singleAction.date,
+                          customer: singleAction._id,
+                        })
+                      );
+                    }}
+                  >
+                    Edit
+                  </SmallButton>
                 </Td>
                 <Td>
-                  <SmallButton>Delete</SmallButton>
+                  <SmallButton onClick={() => deleteAction(singleAction._id)}>
+                    Delete
+                  </SmallButton>
                 </Td>
               </Tr>
             ))}
@@ -80,6 +121,8 @@ const ListActions = () => {
       ) : (
         <p> Your actions will be displayed here</p>
       )}
+      <br />
+      <Pagination />
     </Main>
   );
 };

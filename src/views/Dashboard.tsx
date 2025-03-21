@@ -4,6 +4,7 @@ import { logout } from "../store/authenticationSlice";
 import { Link, Outlet, useNavigate } from "react-router";
 import Footer from "../components/Footer";
 import { change, cleanTheData } from "../store/newEditSlice";
+import { getClickedPage } from "../store/paginationSlice";
 const Main = styled.div``;
 const NavigationBar = styled.nav`
   background-color: #e6e6e6;
@@ -43,6 +44,7 @@ const ListElement = styled.li`
 `;
 const Dashboard = () => {
   const user = localStorage.getItem("username"); // getting the data (username) from the localStorage
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -66,7 +68,12 @@ const Dashboard = () => {
         <SideBar>
           <UnOrderedList>
             <ListElement>
-              <Link to={"/"}>List of customers</Link>
+              <Link
+                onClick={() => dispatch(getClickedPage("customers"))}
+                to={"/"}
+              >
+                List of customers
+              </Link>
             </ListElement>
 
             <ListElement>

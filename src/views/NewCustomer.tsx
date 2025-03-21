@@ -15,13 +15,15 @@ const Main = styled.div`
 const NewCustomer = () => {
   const dataToBeEdited = useSelector((state) => state.changeForm.data);
   const [data, setData] = useState<NewCustomerType>(dataToBeEdited);
+
+  const changeForm = useSelector((state) => state.changeForm.changeState);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     setData(dataToBeEdited);
   }, [dataToBeEdited]);
 
-  console.log(data);
   const createCustomer = async () => {
     try {
       await apiClient.post(`/customers`, data);
@@ -50,8 +52,6 @@ const NewCustomer = () => {
         : { [name]: value }),
     }));
   };
-
-  const changeForm = useSelector((state) => state.changeForm.changeState);
 
   return (
     <Main>

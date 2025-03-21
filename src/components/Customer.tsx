@@ -6,6 +6,8 @@ import { useNavigate, useParams } from "react-router";
 import { NewCustomerType } from "../types/customerType";
 import { Button } from "../reusableStyle/buttons";
 import ListActions from "./ListActions";
+import { useDispatch } from "react-redux";
+import { changePage } from "../store/newEditActionsSlice";
 const Main = styled.div`
   margin: auto;
   width: 70%;
@@ -30,6 +32,7 @@ const Customer = () => {
   const { id } = useParams();
 
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const getCustomer = async () => {
     try {
       const response = await apiClient.get(`/customers/${id}`);
@@ -62,6 +65,7 @@ const Customer = () => {
           <Button
             onClick={() => {
               navigate(`/customer/${data._id}/add`);
+              dispatch(changePage(false));
             }}
           >
             Add Action

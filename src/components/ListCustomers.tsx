@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import styled from "styled-components";
 import { apiClient } from "../apiCRM";
 import { SmallButton } from "../reusableStyle/buttons";
 import { Link, useNavigate, useSearchParams } from "react-router";
@@ -13,6 +12,7 @@ import {
   OrderedList,
   SingleItem,
 } from "../reusableStyle/listStyle";
+import { getClickedPage, getIdCustomer } from "../store/paginationSlice";
 
 const ListCustomers = () => {
   const [data, setData] = useState<CustomerData[]>([]);
@@ -20,6 +20,9 @@ const ListCustomers = () => {
   const [triggerDelete, setTriggerDelete] = useState(true);
   const [searchParams] = useSearchParams();
   let page = searchParams.get("page");
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const getCustomers = async () => {
     setLoading(true);
@@ -32,9 +35,11 @@ const ListCustomers = () => {
       setLoading(false);
     }
   };
+
   useEffect(() => {
     getCustomers();
   }, [page, triggerDelete]);
+
   const deleteCustomer = async (customerId: string) => {
     try {
       await apiClient.delete(`/customers/${customerId}`);
@@ -44,8 +49,7 @@ const ListCustomers = () => {
       console.error("unable to deleteCustomer", error);
     }
   };
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+
   return (
     <Main>
       <Title>List of Customers</Title>
@@ -55,7 +59,15 @@ const ListCustomers = () => {
             data.map((data: CustomerData) => (
               <ContainerSingleItem key={data._id}>
                 <SingleItem>
-                  <Link to={`/customer/${data._id}`}>{data.name}</Link>
+                  <Link
+                    onClick={() => {
+                      dispatch(getClickedPage("actions")),
+                        dispatch(getIdCustomer(`${data._id}`));
+                    }}
+                    to={`/customer/${data._id}`}
+                  >
+                    {data.name}
+                  </Link>
                 </SingleItem>
                 <SmallButton
                   onClick={() => {
