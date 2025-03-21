@@ -3,7 +3,7 @@ import { Title } from "../reusableStyle/loginSignOut";
 import { apiClient } from "../apiCRM";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { NewCustomerType } from "../types/customerType";
+import { CustomerData, NewCustomerType } from "../types/customerType";
 import { Button } from "../reusableStyle/buttons";
 import ListActions from "./ListActions";
 import { useDispatch } from "react-redux";
@@ -28,7 +28,7 @@ const Element = styled.li`
 `;
 
 const Customer = () => {
-  const [data, setData] = useState<NewCustomerType>();
+  const [data, setData] = useState<CustomerData>();
   const { id } = useParams();
 
   const navigate = useNavigate();
