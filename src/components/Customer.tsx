@@ -7,7 +7,7 @@ import { NewCustomerType } from "../types/customerType";
 import { Button } from "../reusableStyle/buttons";
 import ListActions from "./ListActions";
 import { useDispatch } from "react-redux";
-import { changePage } from "../store/newEditActionsSlice";
+import { changePage, clearSingleAction } from "../store/newEditActionsSlice";
 const Main = styled.div`
   margin: auto;
   width: 70%;
@@ -66,6 +66,7 @@ const Customer = () => {
             onClick={() => {
               navigate(`/customer/${data._id}/add`);
               dispatch(changePage(false));
+              dispatch(clearSingleAction());
             }}
           >
             Add Action

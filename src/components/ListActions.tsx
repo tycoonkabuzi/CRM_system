@@ -6,8 +6,15 @@ import { SmallButton } from "../reusableStyle/buttons";
 
 import styled from "styled-components";
 import Pagination from "./Pagination";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changePage, getSingleAction } from "../store/newEditActionsSlice";
+type ActionType = {
+  type: string;
+  description: string;
+  date: string;
+  customer: string;
+  _id?: string;
+};
 
 const Main = styled.div`
   margin-top: 100px;
@@ -37,7 +44,7 @@ const Tr = styled.tr`
   }
 `;
 const ListActions = () => {
-  const [data, setData] = useState({ data: [] });
+  const [data, setData] = useState<ActionType[]>([]);
 
   const [triggerDelete, setTriggerDelete] = useState(true);
 
@@ -52,7 +59,7 @@ const ListActions = () => {
       const response = await apiClient.get(
         `/actions/${id}?page=${thePage}&limit=10`
       );
-      setData(response.data);
+      setData(response.data.data);
     } catch (error) {
       console.error("unable to add action  to api", error);
     }
@@ -74,7 +81,7 @@ const ListActions = () => {
 
   return (
     <Main>
-      {data.data.length !== 0 ? (
+      {data.length !== 0 ? (
         <>
           <Title> Actions performed</Title>
 
@@ -86,7 +93,7 @@ const ListActions = () => {
               <Th>Edit</Th>
               <Th>Delete</Th>
             </Tr>
-            {data.data.map((singleAction) => (
+            {data.map((singleAction) => (
               <Tr key={singleAction.date}>
                 <Td>{singleAction.description}</Td>
                 <Td>{singleAction.type}</Td>
@@ -101,7 +108,7 @@ const ListActions = () => {
                           type: singleAction.type,
                           description: singleAction.description,
                           date: singleAction.date,
-                          customer: singleAction._id,
+                          customer: id,
                         })
                       );
                     }}
