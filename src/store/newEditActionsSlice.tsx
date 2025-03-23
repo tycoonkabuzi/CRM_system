@@ -16,7 +16,7 @@ const newEditActionSlice = createSlice({
       state.formChange = action.payload;
       return state;
     },
-    getSingleAction: (state, action) => {
+    setSingleAction: (state, action) => {
       state.data = action.payload;
       return state;
     },
@@ -31,6 +31,6 @@ const newEditActionSlice = createSlice({
     },
   },
 });
-export const { changePage, getSingleAction, clearSingleAction } =
+export const { changePage, setSingleAction, clearSingleAction } =
   newEditActionSlice.actions;
 export default newEditActionSlice.reducer;

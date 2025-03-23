@@ -51,7 +51,7 @@ const AddAction = () => {
 
   const editAction = async () => {
     try {
-      await apiClient.put(`/actions/${id}`, data);
+      await apiClient.put(`/actions/${dataState._id}`, data);
       alert(`the action was edited successfully`);
     } catch (error) {
       console.error("unable to add action  to api", error);

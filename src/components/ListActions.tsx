@@ -7,7 +7,7 @@ import { SmallButton } from "../reusableStyle/buttons";
 import styled from "styled-components";
 import Pagination from "./Pagination";
 import { useDispatch } from "react-redux";
-import { changePage, getSingleAction } from "../store/newEditActionsSlice";
+import { changePage, setSingleAction } from "../store/newEditActionsSlice";
 type ActionType = {
   type: string;
   description: string;
@@ -103,14 +103,7 @@ const ListActions = () => {
                     onClick={() => {
                       navigate(`/customer/${id}/edit`);
                       dispatch(changePage(true));
-                      dispatch(
-                        getSingleAction({
-                          type: singleAction.type,
-                          description: singleAction.description,
-                          date: singleAction.date,
-                          customer: id,
-                        })
-                      );
+                      dispatch(setSingleAction(singleAction));
                     }}
                   >
                     Edit
