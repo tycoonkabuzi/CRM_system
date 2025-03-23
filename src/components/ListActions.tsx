@@ -7,7 +7,7 @@ import { SmallButton } from "../reusableStyle/buttons";
 import styled from "styled-components";
 import Pagination from "./Pagination";
 import { useDispatch } from "react-redux";
-import { changePage, setSingleAction } from "../store/newEditActionsSlice";
+import { changePage, setSingleAction } from "../store/actionsSlice";
 type ActionType = {
   type: string;
   description: string;

@@ -4,7 +4,7 @@ import { SmallButton } from "../reusableStyle/buttons";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import Pagination from "./Pagination";
 import { useDispatch } from "react-redux";
-import { change, setTheData } from "../store/newEditSlice";
+import { change, setTheData } from "../store/customerSlice";
 import { CustomerData } from "../types/customerType";
 import { Main, Title } from "../reusableStyle/listStyle";
 import {
@@ -15,6 +15,7 @@ import {
 import { getClickedPage, getIdCustomer } from "../store/paginationSlice";
 
 const ListCustomers = () => {
+  const LIMIT_PAGE = 10;
   const [data, setData] = useState<CustomerData[]>([]);
   const [loading, setLoading] = useState(true);
   const [triggerDelete, setTriggerDelete] = useState(true);
@@ -27,7 +28,9 @@ const ListCustomers = () => {
   const getCustomers = async () => {
     setLoading(true);
     try {
-      const response = await apiClient.get(`/customers?page=${page}&limit=10`);
+      const response = await apiClient.get(
+        `/customers?page=${page}&limit=${LIMIT_PAGE}`
+      );
       setData(response.data.data);
     } catch (error) {
       console.error("Error fetching clients:", error);
@@ -53,8 +56,8 @@ const ListCustomers = () => {
   return (
     <Main>
       <Title>List of Customers</Title>
-      <OrderedList>
-        {loading == false ? (
+      <OrderedList start={!page ? 1 : (Number(page) - 1) * LIMIT_PAGE + 1}>
+        {!loading ? (
           data.length != 0 ? (
             data.map((data: CustomerData) => (
               <ContainerSingleItem key={data._id}>

@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { apiClient } from "../apiCRM";
 import { NewCustomerType } from "../types/customerType";
 import { useDispatch, useSelector } from "react-redux";
-import { cleanTheData } from "../store/newEditSlice";
+import { cleanTheData } from "../store/customerSlice";
 
 const Main = styled.div`
   margin-top: 100px;

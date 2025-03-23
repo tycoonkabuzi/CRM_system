@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import authenticationReducer from "./authenticationSlice";
 import paginationReducer from "./paginationSlice";
-import changeFormReducer from "./newEditSlice";
-import newEditActionReducer from "./newEditActionsSlice";
+import changeFormReducer from "./customerSlice";
+import newEditActionReducer from "./actionsSlice";
 export const store = configureStore({
   reducer: {
     auth: authenticationReducer,

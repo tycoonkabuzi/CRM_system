@@ -7,7 +7,7 @@ import { CustomerData, NewCustomerType } from "../types/customerType";
 import { Button } from "../reusableStyle/buttons";
 import ListActions from "./ListActions";
 import { useDispatch } from "react-redux";
-import { changePage, clearSingleAction } from "../store/newEditActionsSlice";
+import { changePage, clearSingleAction } from "../store/actionsSlice";
 const Main = styled.div`
   margin: auto;
   width: 70%;

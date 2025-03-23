@@ -6,7 +6,7 @@ import Dashboard from "./views/Dashboard";
 import Customer from "./components/Customer";
 import ListCustomers from "./components/ListCustomers";
 import NewCustomer from "./views/NewCustomer";
-import AddAction from "./components/AddAction";
+import ManageActions from "./components/manageActions";
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
           <Route path="customer/:id" element={<Customer />} />
           <Route path="new" element={<NewCustomer />} />
           <Route path="edit/" element={<NewCustomer />} />
-          <Route path="customer/:id/add" element={<AddAction />} />
-          <Route path="/customer/:id/edit" element={<AddAction />} />
+          <Route path="customer/:id/add" element={<ManageActions />} />
+          <Route path="/customer/:id/edit" element={<ManageActions />} />
         </Route>
       </Routes>
     </>

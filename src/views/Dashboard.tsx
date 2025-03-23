@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { logout } from "../store/authenticationSlice";
 import { Link, Outlet, useNavigate } from "react-router";
 import Footer from "../components/Footer";
-import { change, cleanTheData } from "../store/newEditSlice";
+import { change, cleanTheData } from "../store/customerSlice";
 import { getClickedPage } from "../store/paginationSlice";
 const Main = styled.div``;
 const NavigationBar = styled.nav`

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Input, Label, Title } from "../reusableStyle/loginSignOut";
 import { Button } from "../reusableStyle/buttons";
-import { apiClient, standardApiClient } from "../apiCRM";
+import { apiClient } from "../apiCRM";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
@@ -33,7 +33,7 @@ const Select = styled.select`
 const Option = styled.option`
   width: 70%;
 `;
-const AddAction = () => {
+const ManageActions = () => {
   const dataState = useSelector((state) => state.newEditAction.data);
   const [data, setData] = useState(dataState);
   console.log(data);
@@ -122,4 +122,4 @@ const AddAction = () => {
     </Main>
   );
 };
-export default AddAction;
+export default ManageActions;
